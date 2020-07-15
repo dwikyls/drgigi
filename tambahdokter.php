@@ -1,7 +1,24 @@
+<?php
+include 'koneksi.php';
+if(isset($_POST['update']))
+{ 
+$id         = $_POST['id'];
+$nama       = $_POST['nama'];
+$username   = $_POST['username'];
+$password   = $_POST['password'];
+$jk         = $_POST['jk'];
+$usia       = $_POST['usia'];
+$spesial    = $_POST['spesial'];
+$query =mysqli_query($link, "INSERT INTO users SET id='$id', nama='$nama', username='$username', password='$password', level='Dokter'");
+$query.=mysqli_query($link, "INSERT INTO tbdokter SET id='$id', jk='$jk', usia='$usia', spesial='$spesial'");
+header("location:welcomeadmin.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>REGISTRASI</title>
+        <title>Tambah Data</title>
         <style type="text/css">
         .container{
             width: 300px;
@@ -20,7 +37,6 @@
             border-radius: 5px;
         }
         .container td button{
-            margin-left: 150px;
             height: 40px;
             font-size: 15px;
             color: white;
@@ -38,6 +54,7 @@
             outline: none;
             border: none;
             width: 400px;
+            border-radius: 5px;
         }
         a{
             font-family: Baloo;
@@ -55,18 +72,26 @@
     </style>
     </head>
     <body>
-        <a href="index.php">Kembali</a>
-        <h1>Daftar ke Gigi</h1>
+        <a href="welcomeadmin.php">Kembali</a>
+        <h1>Tambah Dokter</h1>
         <div class="container">
-        <form method="post" action="registrasi.php">
+        <form method="post" >
             <table>
-                <td>No. KTP</td>
+                <td>ID</td>
                 <tr>
                     <td><input type="text" name="id"></td>
                 </tr>
                 <td>Nama</td>
                 <tr>
                     <td><input type="text" name="nama"></td>
+                </tr>
+                <td>Username</td>
+                <tr>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <td>Password</td>
+                <tr>
+                    <td><input type="text" name="password"></td>
                 </tr>
                 <td>Usia</td>
                 <tr>
@@ -75,10 +100,17 @@
                 <td>Jenis Kelamin</td>
                 <tr>
                     <td><select name="jk">
-                    <option value="Pria">Pria</option>
-                    <option value="Wanita">Wanita</option>
-                </select></td></tr>
-                <tr><td><button type="submit" value="simpan">SIMPAN</button></td></tr>
+                        <option value="Pria">Pria</option>
+                        <option value="Wanita">Wanita</option>
+                    </select></td>
+                </tr>
+                <td>Spesialis</td>
+                <tr>
+                    <td><input type="text" name="spesial"></td>
+                </tr>
+                <tr>
+                    <td><button name="update">Tambah</button></td>
+                </tr>
             </table>
         </form>
         </div>

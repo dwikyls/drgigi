@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    include 'koneksi.php';
+    $username   = $_SESSION['username'];
+    $password   = $_SESSION['password'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +41,6 @@
     </style>
 </head>
 <body>
-	<a href="jadwal.php" style="position: absolute; text-decoration: none; border-radius: 5px; background-color: #2f87ad; color: white; height: 25px; width: 100px; font-family: Baloo; font-size: 15px; text-align: center; padding: 10px;">Jadwal Dokter</a>
 	<p  style="margin-left: 1150px;">Belum daftar?<a href="register.php" style="text-decoration: none;"> Join</a></p>
 	<div class="container">
 	<h1>Login to Gigi</h1>
@@ -42,7 +48,7 @@
 			<table>
 				<td>Username</td>
 				<tr>
-					<td><input type="text" name="username"></td>
+					<td><input type="text" name="username" value=<?php echo $username ?>></td>
 				</tr>
 				<td>Password</td>
 				<tr>

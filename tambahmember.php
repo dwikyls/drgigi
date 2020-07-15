@@ -1,7 +1,23 @@
+<?php
+include 'koneksi.php';
+if(isset($_POST['update']))
+{ 
+$id         = $_POST['id'];
+$nama       = $_POST['nama'];
+$username   = $_POST['username'];
+$password   = $_POST['password'];
+$jk         = $_POST['jk'];
+$usia       = $_POST['usia'];
+$query =mysqli_query($link, "INSERT INTO users SET id='$id', nama='$nama', username='$username', password='$password', level='Pasien'");
+$query.=mysqli_query($link, "INSERT INTO tbpasien SET id='$id', jk='$jk', usia='$usia'");
+header("location:welcomeadmin.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>REGISTRASI</title>
+        <title>Tambah Data</title>
         <style type="text/css">
         .container{
             width: 300px;
@@ -55,18 +71,26 @@
     </style>
     </head>
     <body>
-        <a href="index.php">Kembali</a>
-        <h1>Daftar ke Gigi</h1>
+        <a href="welcomeadmin.php">Kembali</a>
+        <h1>Tambah Member</h1>
         <div class="container">
-        <form method="post" action="registrasi.php">
+        <form method="post" >
             <table>
-                <td>No. KTP</td>
+                <td>ID</td>
                 <tr>
                     <td><input type="text" name="id"></td>
                 </tr>
                 <td>Nama</td>
                 <tr>
                     <td><input type="text" name="nama"></td>
+                </tr>
+                <td>Username</td>
+                <tr>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <td>Password</td>
+                <tr>
+                    <td><input type="text" name="password"></td>
                 </tr>
                 <td>Usia</td>
                 <tr>
@@ -75,10 +99,13 @@
                 <td>Jenis Kelamin</td>
                 <tr>
                     <td><select name="jk">
-                    <option value="Pria">Pria</option>
-                    <option value="Wanita">Wanita</option>
-                </select></td></tr>
-                <tr><td><button type="submit" value="simpan">SIMPAN</button></td></tr>
+                        <option value="Pria">Pria</option>
+                        <option value="Wanita">Wanita</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><button name="update">Tambah</button></td>
+                </tr>
             </table>
         </form>
         </div>

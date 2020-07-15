@@ -1,7 +1,7 @@
 <?php
-session_start();
+	session_start();
+	if(session_is_registered(‘username’)){
+		session_unset();
+		session_destroy();
+	}
 ?>
-
-Selamat Datang Users <?php echo $_SESSION['nama']?>
-
-<a href="logout.php">Logout</a>

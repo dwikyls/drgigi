@@ -1,59 +1,98 @@
-<!DOCTYPE html>
+<?php
+session_start();
+include 'koneksi.php';
+if(isset($_POST['update']))
+{
+    $nama       = $_POST['nama'];
+    $username   = $_POST['username'];
+    $password   = $_POST['password'];
+    $result     = mysqli_query($link, "UPDATE users SET username='$username',password='$password' WHERE nama='$nama'");
+    header("Location: welcome.php");
+}
+?>
+<?php
+    $nama       = $_SESSION['nama'];
+    $username   = $_SESSION['username'];
+    $password   = $_SESSION['password'];
+?>
 <html>
-    <head>
-        <title>Tambah Data</title>
-        <style type="text/css">
-            body{
-                background-color: #a83251;
-            }
-            .container{
-                padding: 50px;
-                width: 660px;
-                max-height:1000px;
-                background-color: #327da8;
-                font-family: Lucida Sans Unicode;
-                font-size: 30px;
-                margin-top: 0px;
-                margin-left: 350px;
-                color: white;
-                border-radius: 20px;
-            }
-            button{
-                height: 50px;
-                width: 660px;
-                border-radius: 20px;
-                font-size: 30px;
-                color: white;
-                background-color: #fc4e03;
-                border:none;
-                border: 2px solid white;
-            }
-            a{
-                font-family: Baloo;
-                border-radius: 20px;
-                background-color: #fc4e03;
-                height: 50px;
-                width: 110px;
-                font-size: 30px;
-                padding: 10px;
-                position: absolute;
-                text-decoration: none;
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        <a href="welcome.php">Kembali</a>
-        <div class="container">
-        <form method="post" action="edit.php">
-            <table>
-                <tr><td>ID</td><td><input type="text" name="id" style="height: 40px; width: 500px"></td></tr>
-                <tr><td>Nama</td><td><input type="text" name="nama" style="height: 40px; width: 500px"></td></tr>
-                <tr><td>Username</td><td><input type="text" name="username" style="height: 40px; width: 500px"></td></tr>
-                <tr><td>Password</td><td><input type="text" name="password" style="height: 40px; width: 500px"></td></tr>
-                <tr><td colspan="2"><button type="submit" value="simpan">SIMPAN</button></td></tr>
-            </table>
-        </form>
-        </div>
-    </body>
+<head>  
+    <title>Edit User Data</title>
+    <style type="text/css">
+        .container{
+            width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+            margin-left: 500px;
+            font: bold 15px/24px "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 15px;
+        }
+        .container tr td input{
+            height: 40px;
+            background-color: #d8ebe9;
+            outline: none;
+            border: none;
+            width: 400px;
+            border-radius: 5px;
+        }
+        .container td button{
+            margin-left: 150px;
+            height: 40px;
+            font-size: 15px;
+            color: white;
+            background-color: #2f87ad;
+            outline: none;
+            border: none;
+            width: 100px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Baloo;
+        }
+        select{
+            height: 40px;
+            background-color: #d8ebe9;
+            outline: none;
+            border: none;
+            width: 400px;
+        }
+        a{
+            font-family: Baloo;
+            color: white;
+            background-color: #2d87d6;
+            border-radius: 5px;
+            position: absolute;
+            margin-left: 10px;
+            padding: 10px;
+            text-decoration: none;
+        }
+        h1{
+            margin-left: 530px;
+        }
+    </style>
+</head>
+<body>
+    <a href="welcome.php">Kembali</a>
+    <h1>Edit username & password</h1>
+    <div class="container">
+    <form name="update_user" method="post" action="edit.php">
+        <table border="0">
+            <td>Nama</td>
+            <tr>
+                <td><input type="text" name="nama" value="<?php echo $nama ?>"></td>
+            </tr>
+            <td>Username</td>
+            <tr>
+                <td><input type="text" name="username" value=<?php echo $username ?>></td>
+            </tr>
+            <td>Password</td>
+            <tr>
+                <td><input type="text" name="password" value=<?php echo $password ?>></td>
+            </tr>
+            <tr>
+                <td><button name="update">Simpan</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
 </html>

@@ -1,6 +1,8 @@
-<?php
-include 'koneksi.php';
-$id = $_POST['id'];
-$query=mysqli_query($link, "DELETE from users where id");
-header("location:welcome.php");
-?>
+<?php 
+	include 'koneksi.php';
+	$id = $_GET["id"];
+	mysqli_query($link, "DELETE FROM users WHERE id='$id'");
+	mysqli_query($link, "DELETE FROM tbpasien WHERE id='$id'");
+	mysqli_query($link, "DELETE FROM tbdokter WHERE id='$id'");
+	header("location: welcomeadmin.php");
+ ?>

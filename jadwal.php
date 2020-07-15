@@ -1,28 +1,15 @@
 <?php
 include "koneksi.php";
-$result = mysqli_query($link, "SELECT * FROM users");
+$result = mysqli_query($link, "SELECT * FROM users WHERE level='Dokter'");
 ?>
 
+<!DOCTYPE html>
 <html>
-<head>    
-    <title>Homepage</title>
+<head>
+    <title></title>
     <style type="text/css">
-        .navbar{
-            margin-left: 300px;
-            float: left;
-            margin-top: 20px;
-        }
-        .navbar a{
-            border-radius: 10px;
-            font-family: Arial;
-            color: white;
-            background-color: #2d87d6;
-            text-decoration: none;
-            padding: 20px;
-            font-size: 20px;
-        }
         .form{
-            padding-left: 150px;
+            padding-left: 0px;
             padding-top: 100px;
         }
         table {
@@ -52,7 +39,7 @@ $result = mysqli_query($link, "SELECT * FROM users");
           background: -moz-linear-gradient(top, #fbfbfb, #fafafa);
         }
         h1{
-            margin-right: 200px;
+            margin-right: 0px;
             text-align: center;
             font-family: sans-serif;
         }
@@ -63,28 +50,36 @@ $result = mysqli_query($link, "SELECT * FROM users");
             background-color: #bab7b6;
             text-decoration: none;
         }
+        a{
+            font-family: Baloo;
+            color: white;
+            background-color: #2d87d6;
+            border-radius: 5px;
+            position: absolute;
+            margin-left: 10px;
+            padding: 10px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="tambahadmin.php" style="margin-left: 80px;">Add New Admin</a>
-        <a href="tambahdokter.php">Add New Dokter</a>
-        <a href="tambahmember.php">Add New Member</a>
-        <a href="index.php" style="margin-left: 250px;">Logout</a>
-    </div>
+    <a href="index.php">Kembali</a>
     <div class="form">
-        <h1>Data User Gigi</h1>
-    <table width='80%'>
+        <h1>Jadwal Dokter</h1>
+    <table width='100%'>
     <tr>
-        <th>Id</th> <th>Nama</th> <th>Level</th> <th>Update</th>
+        <th>Nama Dokter</th> <th>Senin</th> <th>Selasa</th> <th>Rabu</th><th>Kamis</th><th>Jum'at</th><th>Sabtu</th>
     </tr>
     <?php  
     while($user_data = mysqli_fetch_array($result)) {         
         echo "<tr>";
-        echo "<td>".$user_data['id']."</td>";
         echo "<td>".$user_data['nama']."</td>";
-        echo "<td>".$user_data['level']."</td>";  
-        echo "<td><a href='updatedataadmin.php?id=$user_data[id]'>Edit</a> | <a href='delete.php?id=$user_data[id]'>Delete</a></td></tr>";
+        echo "<td>08.00 - 15.00</td>";
+        echo "<td>08.00 - 15.00</td>";
+        echo "<td>08.00 - 15.00</td>";
+        echo "<td>08.00 - 15.00</td>";
+        echo "<td>08.00 - 15.00</td>";
+        echo "<td>08.00 - 15.00</td>";
     }
     ?>
     </table>

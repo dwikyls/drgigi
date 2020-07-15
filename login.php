@@ -1,10 +1,10 @@
 <?php
-        session_start();
-        include 'koneksi.php';
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $login = mysqli_query($link,"SELECT * FROM users WHERE username='$username' AND password='$password'");
-        $cek = mysqli_num_rows($login);
+    session_start();
+    include 'koneksi.php';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $login = mysqli_query($link,"SELECT * FROM users WHERE username='$username' AND password='$password'");
+    $cek = mysqli_num_rows($login);
 if($cek > 0){
     $data = mysqli_fetch_assoc($login);
     if($data['level']=="Admin"){
@@ -17,19 +17,18 @@ if($cek > 0){
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['nama']     = $data['nama'];
-        $_SESSION['level'] = "Dokter";
-        header("location:welcome.php");
+        $_SESSION['level']    = "Dokter";
+        header("location:welcomedokter.php");
     }else if($data['level']=="Pasien"){
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['nama']     = $data['nama'];
-        $_SESSION['level'] = "Pasien";
+        $_SESSION['level']    = "Pasien";
         header("location:welcome.php");
     }else{
-        header("location:index.php?pesan=gagal");
+        echo "<script>alert('Username anda salah');history.go(-1);</script>";
     }  
 }else{
-        header("location:index.php?pesan=gagal");
+        echo "<script>alert('Password anda salah');history.go(-1);</script>";
 }
- 
 ?>
